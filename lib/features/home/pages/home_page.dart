@@ -42,13 +42,13 @@ class _HomePageBody extends StatelessWidget {
       create: (context) => HomeCubit()..start(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final itemModel = state.items;
+          final itemModels = state.items;
           return ListView(
             padding: const EdgeInsets.symmetric(
               vertical: 20,
             ),
             children: [
-              for (final itemModel in itemModel)
+              for (final itemModel in itemModels)
                 Dismissible(
                   key: ValueKey(itemModel.id),
                   background: const DecoratedBox(
@@ -134,7 +134,9 @@ class _ListViewItem extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text(itemModel.releaseDate.toString()),
+                        Text(
+                          itemModel.releaseDate.toString(),
+                        ),
                       ],
                     ),
                   ),
@@ -146,15 +148,15 @@ class _ListViewItem extends StatelessWidget {
                   margin: const EdgeInsets.all(10),
                   padding: const EdgeInsets.all(10),
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
-                        '0',
-                        style: TextStyle(
+                        itemModel.daysLeft(),
+                        style: const TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('days left'),
+                      const Text('days left'),
                     ],
                   ),
                 ),
